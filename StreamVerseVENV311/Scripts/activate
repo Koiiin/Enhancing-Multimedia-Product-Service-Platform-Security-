@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\UIT\NT219\Final_Project\StreamVerseVENV311"
+VIRTUAL_ENV="D:\UIT\NT219\Enhancing-Multimedia-Product-Service-Platform-Security\StreamVerseVENV311"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

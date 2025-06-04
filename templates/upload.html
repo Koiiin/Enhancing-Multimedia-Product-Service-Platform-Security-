@@ -1,19 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Upload</title>
+    <meta charset="UTF-8">
+    <title>Upload Video/MP3 | StreamVerse</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .main-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .ui.menu {
+            border-radius: 0;
+        }
+        .header.item {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<div class="ui container" style="padding-top: 50px;">
-    <h2 class="ui header">Upload video hoặc mp3</h2>
-    
-    {% with messages = get_flashed_messages() %}
+<!-- 🔹 Navigation Menu -->
+<div class="ui menu">
+    <div class="header item">🎬 StreamVerse</div>
+    <div class="right menu">
+        <a class="item" href="{{ url_for('main.index') }}">Home</a>
+        {% if current_user.is_authenticated and current_user.role == 'admin' %}
+        <a class="item" href="{{ url_for('admin.dashboard') }}">Admin Dashboard</a>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+        <a class="item" href="{{ url_for('auth.logout') }}">Logout</a>
+        {% else %}
+        <a class="item" href="{{ url_for('auth.login') }}">Login</a>
+        <a class="item" href="{{ url_for('auth.register') }}">Register</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 🔸 Upload Form -->
+<div class="ui container main-container">
+    <h2 class="ui dividing header">📤 Upload Video hoặc MP3</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        <div class="ui positive message">
+        <div class="ui message">
           <ul class="list">
-            {% for msg in messages %}
+            {% for category, msg in messages %}
               <li>{{ msg }}</li>
             {% endfor %}
           </ul>
@@ -23,10 +63,11 @@
 
     <form class="ui form" action="{{ url_for('main.upload') }}" method="post" enctype="multipart/form-data">
         <div class="field">
-            <label>Chọn file (.mp4 hoặc .mp3):</label>
-            <input type="file" name="file" accept=".mp4,.mp3">
+            <label>Chọn tệp (.mp4 hoặc .mp3):</label>
+            <input type="file" name="file" accept=".mp4,.mp3" required>
         </div>
-        <button class="ui primary button" type="submit">Upload</button>
+        <button class="ui primary button" type="submit">⬆️ Upload</button>
+        <a class="ui button" href="{{ url_for('main.index') }}">⬅️ Quay lại</a>
     </form>
 </div>
 

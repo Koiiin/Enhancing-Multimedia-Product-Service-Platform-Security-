@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .header .nav-buttons a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            background-color: #007bff;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .header .nav-buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .summary {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            flex: 1;
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 0 10px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 32px;
+            color: #343a40;
+        }
+
+        .card p {
+            margin: 10px 0 0;
+            color: #6c757d;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .actions a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .actions a:hover {
+            background-color: #218838;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-home a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🎛️ Admin Dashboard</h1>
+        <div class="nav-buttons">
+            <a href="{{ url_for('main.index') }}">🏠 Home</a>
+            <a href="{{ url_for('auth.logout') }}">🚪 Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="summary">
+            <div class="card">
+                <h2>{{ user_count }}</h2>
+                <p>Total Users</p>
+            </div>
+            <div class="card">
+                <h2>{{ video_count }}</h2>
+                <p>Total Videos</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="{{ url_for('admin.users') }}">👤 Manage Users</a>
+            <a href="{{ url_for('admin.videos') }}">🎞️ Manage Videos</a>
+            <a href="{{ url_for('admin.logs') }}">📜 View Logs</a>
+        </div>
+
+        <div class="back-home">
+            <a href="{{ url_for('main.index') }}">⬅️ Back to Homepage</a>
+        </div>
+    </div>
+
+</body>
+</html>

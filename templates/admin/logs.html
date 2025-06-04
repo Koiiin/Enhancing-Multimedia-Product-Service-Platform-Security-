@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>System Logs</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; margin: 0; padding: 0; }
+        .container { max-width: 900px; margin: 30px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        h2 { margin-bottom: 20px; }
+        pre {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 20px;
+            border-radius: 6px;
+            max-height: 500px;
+            overflow-y: scroll;
+            font-family: monospace;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📜 System Logs</h2>
+        <pre>
+{% for line in logs %}
+{{ line }}
+{% endfor %}
+        </pre>
+        <a href="{{ url_for('admin.dashboard') }}" class="back-link">⬅️ Back to Dashboard</a>
+    </div>
+</body>
+</html>

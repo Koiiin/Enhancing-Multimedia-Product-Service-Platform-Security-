@@ -9,3 +9,7 @@ def chaotic_stream_key(length: int, seed: float = 0.7, r: float = 3.99):
 def chaotic_encrypt(data: bytes, seed: float = 0.7) -> bytes:
     stream = chaotic_stream_key(len(data), seed)
     return bytes([b ^ k for b, k in zip(data, stream)])
+
+def chaotic_decrypt(data: bytes, seed: float = 0.7) -> bytes:
+    stream = chaotic_stream_key(len(data), seed)
+    return bytes([b ^ k for b, k in zip(data, stream)])

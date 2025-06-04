@@ -1,0 +1,28 @@
+2025-06-04 15:03:21,986 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-04 15:03:21,987 INFO: [33mPress CTRL+C to quit[0m
+2025-06-04 15:03:21,988 INFO:  * Restarting with stat
+2025-06-04 15:03:22,516 WARNING:  * Debugger is active!
+2025-06-04 15:03:22,519 INFO:  * Debugger PIN: 765-751-060
+2025-06-04 15:03:41,466 INFO: 127.0.0.1 - - [04/Jun/2025 15:03:41] "GET / HTTP/1.1" 200 -
+2025-06-04 15:03:48,676 INFO: 127.0.0.1 - - [04/Jun/2025 15:03:48] "[32mGET /auth/logout HTTP/1.1[0m" 302 -
+2025-06-04 15:03:48,763 INFO: 127.0.0.1 - - [04/Jun/2025 15:03:48] "GET /auth/login HTTP/1.1" 200 -
+2025-06-04 15:03:51,211 INFO: 127.0.0.1 - - [04/Jun/2025 15:03:51] "[32mPOST /auth/login HTTP/1.1[0m" 302 -
+2025-06-04 15:03:51,478 INFO: 127.0.0.1 - - [04/Jun/2025 15:03:51] "GET / HTTP/1.1" 200 -
+2025-06-04 15:03:55,308 INFO: 127.0.0.1 - - [04/Jun/2025 15:03:55] "GET /watch/1 HTTP/1.1" 200 -
+2025-06-04 15:03:58,823 INFO: 127.0.0.1 - - [04/Jun/2025 15:03:58] "GET /watch/1 HTTP/1.1" 200 -
+2025-06-04 15:04:11,380 INFO: 127.0.0.1 - - [04/Jun/2025 15:04:11] "GET /watch/2 HTTP/1.1" 200 -
+2025-06-04 15:04:48,732 INFO: 127.0.0.1 - - [04/Jun/2025 15:04:48] "GET /watch/1 HTTP/1.1" 200 -
+2025-06-04 15:04:48,831 INFO: 127.0.0.1 - - [04/Jun/2025 15:04:48] "GET /watch/1 HTTP/1.1" 200 -
+2025-06-04 15:07:06,905 INFO:  * Detected change in 'D:\\UIT\\NT219\\Enhancing-Multimedia-Product-Service-Platform-Security-\\app.py', reloading
+2025-06-04 15:07:06,974 INFO:  * Restarting with stat
+2025-06-04 15:07:07,544 WARNING:  * Debugger is active!
+2025-06-04 15:07:07,547 INFO:  * Debugger PIN: 765-751-060
+2025-06-04 15:07:17,271 INFO: 127.0.0.1 - - [04/Jun/2025 15:07:17] "GET /watch/3 HTTP/1.1" 200 -
+2025-06-04 15:07:17,637 INFO: 127.0.0.1 - - [04/Jun/2025 15:07:17] "GET /watch/3 HTTP/1.1" 200 -
+2025-06-04 15:07:51,455 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-04 15:07:51,455 INFO: [33mPress CTRL+C to quit[0m
+2025-06-04 15:07:51,457 INFO:  * Restarting with stat
+2025-06-04 15:07:51,986 WARNING:  * Debugger is active!
+2025-06-04 15:07:51,991 INFO:  * Debugger PIN: 765-751-060

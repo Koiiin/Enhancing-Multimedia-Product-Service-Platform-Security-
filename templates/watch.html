@@ -2,36 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Watch Video</title>
+    <title>Xem Video | StreamVerse</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <style>
         body {
-            background-color: #f5f5f5;
-            padding-top: 30px;
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', sans-serif;
         }
-        .ui.container {
+
+        .main-container {
             max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
+
+        .ui.menu {
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+
         video {
             width: 100%;
             border: 1px solid #ccc;
             border-radius: 8px;
         }
+
+        .header.item {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .video-title {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
 
-<div class="ui container">
+<!-- 🔹 Menu điều hướng -->
+<div class="ui menu">
+    <div class="header item">🎬 StreamVerse</div>
+    <div class="right menu">
+        <a class="item" href="{{ url_for('main.index') }}">Home</a>
+        {% if current_user.is_authenticated and current_user.role == 'admin' %}
+        <a class="item" href="{{ url_for('admin.dashboard') }}">Admin Dashboard</a>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+        <a class="item" href="{{ url_for('auth.logout') }}">Logout</a>
+        {% else %}
+        <a class="item" href="{{ url_for('auth.login') }}">Login</a>
+        <a class="item" href="{{ url_for('auth.register') }}">Register</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 🔸 Phần chính -->
+<div class="ui container main-container">
     <h2 class="ui dividing header">📺 Xem Video</h2>
+
+    {% if video %}
+        <div class="video-title">{{ video.filename }}</div>
+    {% endif %}
 
     <div class="ui segment">
         <video controls autoplay>
-            <source src="{{ url_for('main.watch', video_id=video_id) }}" type="video/mp4">
+            <source src="{{ url_for('main.player', video_id=video.id) }}" type="video/mp4">
             Trình duyệt của bạn không hỗ trợ HTML5 video.
         </video>
     </div>
 
-    <a class="ui button" href="{{ url_for('main.index') }}">⬅ Trở về Trang chính</a>
+    <a class="ui button" href="{{ url_for('main.index') }}">⬅ Quay lại Trang Chính</a>
 </div>
 
 </body>
