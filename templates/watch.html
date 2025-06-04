@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Watch Video</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            padding-top: 30px;
+        }
+        .ui.container {
+            max-width: 800px;
+        }
+        video {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ui container">
+    <h2 class="ui dividing header">📺 Xem Video</h2>
+
+    <div class="ui segment">
+        <video controls autoplay>
+            <source src="{{ url_for('main.watch', video_id=video_id) }}" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ HTML5 video.
+        </video>
+    </div>
+
+    <a class="ui button" href="{{ url_for('main.index') }}">⬅ Trở về Trang chính</a>
+</div>
+
+</body>
+</html>

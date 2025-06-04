@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StreamVerse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <style>
+        body {
+            padding: 30px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ui menu">
+    <div class="header item">🎬 StreamVerse</div>
+    <div class="right menu">
+        <a class="item" href="{{ url_for('main.upload') }}">Upload Video</a>
+        {% if current_user.is_authenticated %}
+        <a class="item" href="{{ url_for('auth.logout') }}">Logout</a>
+        {% else %}
+        <a class="item" href="{{ url_for('auth.login') }}">Login</a>
+        <a class="item" href="{{ url_for('auth.register') }}">Register</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="ui container">
+    <h2 class="ui dividing header">🎥 Chọn video để xem</h2>
+
+    <form class="ui form">
+        <div class="field">
+            <label>Danh sách video:</label>
+            <select class="ui dropdown" onchange="handleWatch(this.value)">
+                <option value="">-- Chọn video --</option>
+                {% for video in videos %}
+                <option value="{{ url_for('main.player', video_id=video.id) }}">{{ video.filename }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+
+    {% if videos|length == 0 %}
+        <div class="ui warning message">
+            Hiện chưa có video nào. Nếu bạn là content provider, hãy upload video.
+        </div>
+    {% endif %}
+</div>
+
+<script>
+    function handleWatch(link) {
+        if (link) window.location.href = link;
+    }
+</script>
+
+</body>
+</html>
