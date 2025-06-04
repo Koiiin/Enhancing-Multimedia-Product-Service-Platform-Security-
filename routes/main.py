@@ -42,7 +42,10 @@ def upload():
             os.makedirs(encrypted_folder, exist_ok=True)
 
             raw_path = os.path.join(upload_folder, filename)
-            enc_path = os.path.join(encrypted_folder, f"enc_{uuid.uuid4().hex}.mp4")
+            ext = filename.rsplit('.', 1)[1].lower()
+            enc_filename = f"enc_{uuid.uuid4().hex}.{ext}"
+            enc_path = os.path.join(encrypted_folder, enc_filename)
+
             file.save(raw_path)
 
             dek = generate_video_key()
@@ -80,28 +83,44 @@ def watch(video_id):
         abort(404)
 
     dek = decrypt_dek_with_kek(video.encrypted_dek)
-    decrypted_path = f"temp/decrypted_{video.id}.mp4"
-    os.makedirs("temp", exist_ok=True)
+    ext = video.filename.rsplit('.', 1)[1].lower()
+    temp_folder = current_app.config['TEMP_FOLDER']
+    os.makedirs(temp_folder, exist_ok=True)
+    decrypted_path = os.path.join(temp_folder, f"decrypted_{video.id}.{ext}")
+    mime_type = 'audio/mpeg' if ext == 'mp3' else 'video/mp4'
 
-    if not os.path.exists(decrypted_path):
+    try:
         aes_decrypt_file(encrypted_path, decrypted_path, dek)
+    except Exception as e:
+        flash("Failed to decrypt video.")
+        current_app.logger.error(f"Decryption failed: {e}")
+        abort(500)
+
 
     # Sinh Session Key ngẫu nhiên mỗi lần xem
     session_key = secrets.SystemRandom().uniform(0.6, 0.99)
     
-    @after_this_request
-    def cleanup(response):
-        try:
-            os.remove(decrypted_path)
-        except Exception:
-            pass
-        return response
+    # @after_this_request
+    # def cleanup(response):
+    #     try:
+    #         os.remove(decrypted_path)
+    #     except Exception:
+    #         pass
+    #     return response
 
     #  Chaotic mã hóa stream nội dung trước khi gửi
     def generate():
-        with open(decrypted_path, 'rb') as f:
-            while chunk := f.read(4096):
-                encrypted_chunk = chaotic_encrypt(chunk, seed=session_key)
-                yield encrypted_chunk
+        try:
+            with open(decrypted_path, 'rb') as f:
+                while chunk := f.read(4096):
+                # Mã hóa theo chaotic cipher nếu cần
+                # encrypted_chunk = chaotic_encrypt(chunk, seed=session_key)
+                # yield encrypted_chunk
+                    yield chunk
+        finally:
+            try:
+                os.remove(decrypted_path)
+            except Exception as e:
+                current_app.logger.error(f"Failed to delete temp file: {e}")
 
-    return current_app.response_class(generate(), mimetype='video/mp4')
+    return current_app.response_class(generate(), mimetype=mime_type)
