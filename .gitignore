@@ -2,3 +2,4 @@ encrypted_videos/*
 instance/*
 __pycache__
 .pyc
+.env
