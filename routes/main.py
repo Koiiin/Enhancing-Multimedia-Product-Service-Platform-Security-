@@ -11,6 +11,7 @@ from utils.crypto_utils import aes_encrypt_file, aes_decrypt_file
 from utils.chaotic_cipher import chaotic_encrypt, chaotic_decrypt
 from functools import wraps
 from flask import abort
+from models import ViewingHistory
 
 main = Blueprint('main', __name__)
 
@@ -95,7 +96,9 @@ def upload():
                 filename=filename,
                 filepath=enc_path,
                 uploaded_by=current_user.id,
-                encrypted_dek=encrypted_dek_combined
+                uploaded_by_user=current_user,
+                encrypted_dek=encrypted_dek_combined,
+                chaotic_seed=session_key
             )
             db.session.add(video)
             db.session.commit()
@@ -170,5 +173,15 @@ def watch(video_id):
                 except Exception as e:
                     logging.error(f"[CLEANUP ERROR] {e}")
 
+    # ➤ Lưu lịch sử xem
+    history = ViewingHistory(user_id=current_user.id, video_id=video.id)
+    db.session.add(history)
+    db.session.commit()
+    
     return current_app.response_class(generate(), mimetype=mime_type)
 
+@main.route('/history')
+@login_required
+def history():
+    records = ViewingHistory.query.filter_by(user_id=current_user.id).order_by(ViewingHistory.timestamp.desc()).all()
+    return render_template('history.html', records=records)

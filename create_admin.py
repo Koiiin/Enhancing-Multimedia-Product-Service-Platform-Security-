@@ -11,7 +11,7 @@ db.init_app(app)
 with app.app_context():
     username = "admin"
     email = "admin@example.com"
-    password = "admin123"  # Đổi thành mật khẩu mạnh
+    password = "admin123" 
     if not User.query.filter_by(username=username).first():
         admin = User(
             username=username,

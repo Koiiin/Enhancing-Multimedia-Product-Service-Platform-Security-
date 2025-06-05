@@ -40,6 +40,8 @@
         {% if current_user.is_authenticated and current_user.role == 'admin' %}
         <a class="item" href="{{ url_for('admin.dashboard') }}">Admin Dashboard</a>
         {% endif %}
+        <a class="item" href="{{ url_for('payment.billing') }}">Billing</a>
+        <a class="item" href="{{ url_for('main.history') }}">History</a>
         {% if current_user.is_authenticated %}
         <a class="item" href="{{ url_for('auth.logout') }}">Logout</a>
         {% else %}
@@ -78,7 +80,6 @@
         if (link) window.location.href = link;
     }
 
-    // Kích hoạt dropdown Semantic UI
     document.addEventListener("DOMContentLoaded", () => {
         $('.ui.dropdown').dropdown();
     });

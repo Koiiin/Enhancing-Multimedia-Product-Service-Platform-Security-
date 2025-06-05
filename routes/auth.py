@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask import send_file
 from db import db
 from models import User, RegisterForm, LoginForm
 
@@ -42,9 +42,12 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and check_password_hash(user.password, form.password.data):
             login_user(user)
+            flash('Đăng nhập thành công!', 'success')
             return redirect(url_for('main.index'))
-        flash('Invalid username or password.', 'danger')
+        flash('Tên đăng nhập hoặc mật khẩu sai.', 'danger')
     return render_template('login.html', form=form)
+
+
 
 @auth.route('/logout')
 @login_required

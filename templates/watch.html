@@ -24,12 +24,6 @@
             margin-bottom: 0;
         }
 
-        video {
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
         .header.item {
             font-size: 20px;
             font-weight: bold;
@@ -40,11 +34,26 @@
             font-size: 20px;
             color: #333;
         }
+
+        video {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        #video-loader {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #video-player {
+            display: none;
+        }
     </style>
 </head>
 <body>
 
-<!-- 🔹 Menu điều hướng -->
+<!-- 🔹 Navigation Menu -->
 <div class="ui menu">
     <div class="header item">🎬 StreamVerse</div>
     <div class="right menu">
@@ -61,7 +70,7 @@
     </div>
 </div>
 
-<!-- 🔸 Phần chính -->
+<!-- 🔸 Nội dung chính -->
 <div class="ui container main-container">
     <h2 class="ui dividing header">📺 Xem Video</h2>
 
@@ -69,7 +78,11 @@
         <div class="video-title">{{ video.filename }}</div>
     {% endif %}
 
-    <div class="ui segment">
+    <!-- 🌀 Loading Indicator -->
+    <div id="video-loader" class="ui active inline loader"></div>
+
+    <!-- 🎬 Video Player -->
+    <div id="video-player" class="ui segment">
         <video controls autoplay>
             <source src="{{ url_for('main.player', video_id=video.id) }}" type="video/mp4">
             Trình duyệt của bạn không hỗ trợ HTML5 video.
@@ -78,6 +91,17 @@
 
     <a class="ui button" href="{{ url_for('main.index') }}">⬅ Quay lại Trang Chính</a>
 </div>
+
+<script>
+    const video = document.querySelector("#video-player video");
+    const loader = document.getElementById("video-loader");
+    const player = document.getElementById("video-player");
+
+    video.addEventListener("canplay", function () {
+        loader.style.display = "none";
+        player.style.display = "block";
+    });
+</script>
 
 </body>
 </html>

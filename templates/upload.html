@@ -24,6 +24,11 @@
             font-size: 20px;
             font-weight: bold;
         }
+        #loading {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -68,8 +73,16 @@
         </div>
         <button class="ui primary button" type="submit">⬆️ Upload</button>
         <a class="ui button" href="{{ url_for('main.index') }}">⬅️ Quay lại</a>
+
+        <div id="loading" class="ui active inline loader"></div>
     </form>
 </div>
+
+<script>
+    document.getElementById("uploadForm").addEventListener("submit", function () {
+        document.getElementById("loading").style.display = "block";
+    });
+</script>
 
 </body>
 </html>
