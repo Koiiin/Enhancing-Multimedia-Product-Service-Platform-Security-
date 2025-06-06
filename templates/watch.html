@@ -83,8 +83,8 @@
 
     <!-- 🎬 Video Player -->
     <div id="video-player" class="ui segment">
-        <video controls autoplay>
-            <source src="{{ url_for('main.player', video_id=video.id) }}" type="video/mp4">
+        <video id="video-id" controls autoplay>
+            <!-- <source src="{{ url_for('main.stream_video', video_id=video.id) }}" type="video/mp4"> -->
             Trình duyệt của bạn không hỗ trợ HTML5 video.
         </video>
     </div>
@@ -103,5 +103,12 @@
     });
 </script>
 
+<script>
+    const chaoticSeed = parseFloat("{{ seed }}"); // seed từ Flask render
+    const videoId = "{{ video_id }}"; // ID video từ Flask render
+    const mimeType = {{ mime_type|tojson }}; // MIME type từ Flask render
+    console.log("Chaotic Seed:", chaoticSeed);
+</script>
+<script src="/static/js/stream.js"></script>
 </body>
 </html>

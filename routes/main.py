@@ -1,5 +1,5 @@
 import os, uuid, secrets
-from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app, abort, after_this_request
+from flask import Blueprint, render_template, stream_with_context, request, session, redirect, url_for, flash, current_app, abort, after_this_request
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 
@@ -8,10 +8,11 @@ from models import Video
 from db import db
 from utils.key_utils import generate_video_key, encrypt_dek_with_kek, decrypt_dek_with_kek
 from utils.crypto_utils import aes_encrypt_file, aes_decrypt_file
-from utils.chaotic_cipher import chaotic_encrypt, chaotic_decrypt
 from functools import wraps
 from flask import abort
 from models import ViewingHistory
+from utils.chaotic_cipher import ChaoticCipher
+import subprocess
 
 main = Blueprint('main', __name__)
 
@@ -28,6 +29,20 @@ def role_required(*roles):
             return f(*args, **kwargs)
         return decorated_function
     return decorator
+
+def convert_to_fragmented_mp4(input_path):
+    # Ghi đè file chính nó bằng fragmented version
+    temp_output = input_path + '.frag.mp4'
+    subprocess.run([
+        "ffmpeg",
+        "-i", f"{input_path}",
+        "-c:v", "libx264",
+        "-c:a", "aac",
+        "-movflags", "+frag_keyframe+empty_moov+default_base_moof",
+        "-f", "mp4",
+        f"{temp_output}"
+    ], check=True)
+    os.replace(temp_output, input_path)  # Ghi đè video cũ bằng version đã fragmented
 
 @main.route('/')
 def index():
@@ -60,6 +75,7 @@ def upload():
 
             try:
                 file.save(raw_path)
+                convert_to_fragmented_mp4(raw_path)  # Chuyển đổi sang fragmented MP4
                 logging.info(f"[UPLOAD] Saved raw file to {raw_path}")
             except Exception as e:
                 logging.error(f"[UPLOAD ERROR] Failed to save raw file: {e}")
@@ -71,21 +87,8 @@ def upload():
             dek = generate_video_key()
             aes_encrypt_file(raw_path, enc_path, dek)
 
-            # ➤ Sinh chaotic seed
-            session_key = secrets.SystemRandom().uniform(0.6, 0.99)
-
-            # ➤ Chaotic Encrypt nội dung AES
-            with open(enc_path, 'rb') as aes_file:
-                encrypted_data = aes_file.read()
-
-            chaotic_data = chaotic_encrypt(encrypted_data, seed=session_key)
-
-            with open(enc_path, 'wb') as final_file:
-                final_file.write(chaotic_data)
-
-            # ➤ Mã hóa DEK và lưu seed chung 
+            # # ➤ Mã hóa DEK 
             encrypted_dek = encrypt_dek_with_kek(dek)
-            encrypted_dek_combined = f"{encrypted_dek}|{session_key}"
 
             # ➤ Xóa tệp gốc
             if os.path.exists(raw_path):
@@ -97,8 +100,9 @@ def upload():
                 filepath=enc_path,
                 uploaded_by=current_user.id,
                 uploaded_by_user=current_user,
-                encrypted_dek=encrypted_dek_combined,
-                chaotic_seed=session_key
+                # encrypted_dek=encrypted_dek_combined,
+                encrypted_dek = encrypted_dek,
+                # chaotic_seed=session_key
             )
             db.session.add(video)
             db.session.commit()
@@ -112,10 +116,33 @@ def upload():
 
     return render_template('upload.html')
 
-
 @main.route('/watch/<int:video_id>', endpoint='player')
 @login_required
 def watch(video_id):
+    video = Video.query.get(video_id)
+    if not video:
+        abort(404)
+
+    # Sinh chaotic seed một lần duy nhất
+    chaotic_seed = secrets.SystemRandom().uniform(0.6, 0.99)
+    session['chaotic_seed'] = chaotic_seed
+    session['chaotic_video_id'] = video_id  # Ràng buộc phiên
+
+    ext = video.filename.rsplit('.', 1)[1].lower()
+    mime_type = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"' if ext == 'mp4' else 'audio/mpeg'
+
+    return render_template('watch.html', video=video, seed=chaotic_seed, video_id=video_id, mime_type=mime_type)
+
+@main.route('/stream/<int:video_id>')
+@login_required
+def stream_video(video_id):
+    if session.get('chaotic_video_id') != video_id:
+        abort(403)
+
+    chaotic_seed = session.get('chaotic_seed')
+    if chaotic_seed is None:
+        abort(403)
+
     video = Video.query.get(video_id)
     if not video:
         abort(404)
@@ -125,47 +152,44 @@ def watch(video_id):
         abort(404)
 
     try:
-        # ➤ Tách DEK + chaotic seed
         encrypted_dek = video.encrypted_dek
-        parts = encrypted_dek.split('|')
-        dek = decrypt_dek_with_kek(parts[0])
-        session_key = float(parts[1])
+        dek = decrypt_dek_with_kek(encrypted_dek)
     except Exception as e:
-        flash("Failed to load encryption key.", "danger")
         logging.error(f"[KEY ERROR] {e}")
-        return redirect(url_for('main.index'))
+        return abort(500)
 
     ext = video.filename.rsplit('.', 1)[1].lower()
     temp_folder = current_app.config['TEMP_FOLDER']
     os.makedirs(temp_folder, exist_ok=True)
 
-    aes_path = os.path.join(temp_folder, f"chaotic_decrypted_{video.id}.{ext}")
+    aes_path = os.path.join(temp_folder, f"decrypted_{video.id}.{ext}")
     clean_path = os.path.join(temp_folder, f"clean_{video.id}.{ext}")
-    mime_type = 'audio/mpeg' if ext == 'mp3' else 'video/mp4'
+    mime_type = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"' if ext == 'mp4' else 'audio/mpeg'
 
     try:
-        # ➤ Giải mã chaotic trước
         with open(encrypted_path, 'rb') as f:
-            chaotic_encrypted = f.read()
-        aes_data = chaotic_decrypt(chaotic_encrypted, seed=session_key)
-
+            aes_data = f.read()
         with open(aes_path, 'wb') as f:
             f.write(aes_data)
-
-        # ➤ Giải mã AES
         aes_decrypt_file(aes_path, clean_path, dek)
-
     except Exception as e:
-        flash("Failed to decrypt video.", "danger")
         logging.error(f"[DECRYPT ERROR] {e}")
-        return redirect(url_for('main.index'))
-
-    # ➤ Stream file rõ đến client
+        return abort(500)
+    a = []
     def generate():
         try:
+            chaotic = ChaoticCipher(seed=chaotic_seed)
             with open(clean_path, 'rb') as f:
-                while chunk := f.read(4096):
-                    yield chunk
+                while True:
+                    chunk = f.read(4096)
+                    print(len(chunk))
+                    
+                    if not chunk:
+                        break
+                    else:
+                        chaotic_chunk = chaotic.encrypt(chunk)
+                        chaotic_chunk =  chaotic_chunk 
+                        yield chaotic_chunk
         finally:
             for path in [aes_path, clean_path]:
                 try:
@@ -173,12 +197,13 @@ def watch(video_id):
                 except Exception as e:
                     logging.error(f"[CLEANUP ERROR] {e}")
 
-    # ➤ Lưu lịch sử xem
-    history = ViewingHistory(user_id=current_user.id, video_id=video.id)
-    db.session.add(history)
-    db.session.commit()
-    
-    return current_app.response_class(generate(), mimetype=mime_type)
+    response = current_app.response_class(stream_with_context(generate()), mimetype=mime_type)
+    response.headers['Accept-Ranges'] = 'bytes'
+    response.headers['Content-Disposition'] = 'inline'
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 @main.route('/history')
 @login_required
