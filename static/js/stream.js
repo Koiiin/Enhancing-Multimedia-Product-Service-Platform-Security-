@@ -25,15 +25,12 @@ class ChaoticCipher {
 
 document.addEventListener('DOMContentLoaded', () => {
     const videoElement = document.getElementById('video-id');
-    console.log('Video Element:', videoElement);
     if (!videoElement) return;
 
     // Initialize MediaSource
     const mediaSource = new MediaSource();
     videoElement.src = URL.createObjectURL(mediaSource);
-
-    console.log('MediaSource created:', mediaSource);
-
+    
     videoElement.addEventListener('error', () => {
         console.error('Video Error:', videoElement.error);
     });
@@ -55,15 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
             cache: 'no-store'
         });
 
-        console.log('Fetch response:', response);
-
         if (!response.ok) {
             console.error('Failed to fetch stream:', response.status);
             return;
         }
 
         const reader = response.body.getReader();
-        console.log('Response body reader:', reader);
 
         // Read and process chunks
         async function processStream() {
