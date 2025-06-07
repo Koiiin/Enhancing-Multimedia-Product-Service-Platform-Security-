@@ -12,14 +12,7 @@ from utils.key_utils import generate_master_key
 from flask_migrate import Migrate
 from sqlalchemy import text
 import os
-import sys
 
-if sys.platform.startswith('win'):
-    ffmpeg_path = r'.\\ffmpeg\\bin\\ffmpeg.exe'  # Windows path
-else:
-    ffmpeg_path = './ffmpeg/bin/ffmpeg'  # Linux/macOS path (không có .exe)
-
-os.environ['FFMPEG_BINARY'] = ffmpeg_path
 
 # Khởi tạo app
 app = Flask(__name__)

@@ -13,6 +13,7 @@ from flask import abort
 from models import ViewingHistory
 from utils.chaotic_cipher import ChaoticCipher
 import subprocess
+from ffmpeg_config import ffmpeg_path
 
 main = Blueprint('main', __name__)
 
@@ -34,7 +35,7 @@ def convert_to_fragmented_mp4(input_path):
     # Ghi đè file chính nó bằng fragmented version
     temp_output = input_path + '.frag.mp4'
     subprocess.run([
-        "ffmpeg",
+        f"{ffmpeg_path}",
         "-i", f"{input_path}",
         "-c:v", "libx264",
         "-c:a", "aac",
@@ -182,8 +183,6 @@ def stream_video(video_id):
             with open(clean_path, 'rb') as f:
                 while True:
                     chunk = f.read(4096)
-                    print(len(chunk))
-                    
                     if not chunk:
                         break
                     else:

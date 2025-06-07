@@ -2,6 +2,7 @@ project/
 │
 ├── app.py                       # Điểm khởi chạy Flask App
 ├── config.py                    # Cấu hình chung (DB, thư mục upload,...)
+├── ffmpeg_config                # Cấu hình đường dẫn cho ffmpeg
 ├── master_key.key               # (Sinh một lần) chứa KEK mã hóa DEK
 │
 ├── templates/                   # HTML Templates cho UI
@@ -9,7 +10,9 @@ project/
 │   ├── upload.html              # Trang upload video
 │   └── watch.html               # Trang xem video
 │
-├── static/                      # File tĩnh: CSS, JS
+├── static/                      Decrypt chaotic
+│
+├── ffmpeg/                      Convert từ mp4 -> từng fragment -> mediaSource(Front-End) xử lý
 │
 ├── models.py                   # Định nghĩa các bảng: User, Video,...
 ├── db.py                        # SQLAlchemy init

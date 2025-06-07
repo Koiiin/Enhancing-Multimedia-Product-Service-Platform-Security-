@@ -8,5 +8,3 @@ flask-wtf
 email-validator
 pycryptodome
 boto3
-pyotp 
-qecode[pil]
