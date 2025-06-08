@@ -5,6 +5,8 @@ from db import db
 from functools import wraps
 import os
 import logging
+from utils.KMS import KeyManagementSystem
+from datetime import datetime
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -49,6 +51,18 @@ def logs():
         with open(log_path, 'r', encoding='utf-8') as f:
             logs = f.readlines()[-200:]  
     return render_template('admin/logs.html', logs=logs)
+
+@admin.route('/kms')
+@login_required
+@admin_required
+def kms_dashboard():
+    kms = KeyManagementSystem()
+    kek_last_modified = None
+    kek_exists = os.path.exists('master_key.key')
+    if kek_exists:
+        kek_last_modified = datetime.fromtimestamp(os.path.getmtime('master_key.key'))
+    video_count = Video.query.count()
+    return render_template('admin/kms.html', kek_exists=kek_exists, kek_last_modified=kek_last_modified, video_count=video_count)
 
 @admin.route('/delete_user/<int:user_id>', methods=['POST'])
 @login_required

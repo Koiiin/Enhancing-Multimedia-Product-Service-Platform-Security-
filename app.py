@@ -12,7 +12,7 @@ from utils.key_utils import generate_master_key
 from flask_migrate import Migrate
 from sqlalchemy import text
 import os
-
+from utils.KMS import KeyManagementSystem
 
 # Khởi tạo app
 app = Flask(__name__)

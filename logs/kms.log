@@ -1,0 +1,131 @@
+2025-06-08 08:08:39,529 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-08 08:08:39,529 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-08 08:08:57,728 - INFO - 127.0.0.1 - - [08/Jun/2025 08:08:57] "GET / HTTP/1.1" 200 -
+2025-06-08 08:08:59,615 - INFO - 127.0.0.1 - - [08/Jun/2025 08:08:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-08 08:09:07,939 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:07] "GET /auth/login HTTP/1.1" 200 -
+2025-06-08 08:09:10,403 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:10] "[32mPOST /auth/login HTTP/1.1[0m" 302 -
+2025-06-08 08:09:10,422 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:10] "GET / HTTP/1.1" 200 -
+2025-06-08 08:09:16,086 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:16] "GET /admin/ HTTP/1.1" 200 -
+2025-06-08 08:09:18,341 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:18] "[35m[1mGET /admin/kms HTTP/1.1[0m" 500 -
+2025-06-08 08:09:18,619 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:18] "[36mGET /admin/kms?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-06-08 08:09:18,620 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:18] "[36mGET /admin/kms?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-06-08 08:09:18,686 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:18] "GET /admin/kms?__debugger__=yes&cmd=resource&f=console.png&s=zlytpcPKbK74zswdNrXK HTTP/1.1" 200 -
+2025-06-08 08:09:18,714 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:18] "[36mGET /admin/kms?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-06-08 08:09:48,527 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:48] "GET /admin/kms HTTP/1.1" 200 -
+2025-06-08 08:09:48,571 - INFO - 127.0.0.1 - - [08/Jun/2025 08:09:48] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2025-06-08 08:12:10,569 - INFO - 127.0.0.1 - - [08/Jun/2025 08:12:10] "GET /admin/kms HTTP/1.1" 200 -
+2025-06-08 08:12:17,695 - INFO - 127.0.0.1 - - [08/Jun/2025 08:12:17] "GET /admin/ HTTP/1.1" 200 -
+2025-06-08 08:12:19,964 - INFO - 127.0.0.1 - - [08/Jun/2025 08:12:19] "GET / HTTP/1.1" 200 -
+2025-06-08 08:12:21,657 - INFO - 127.0.0.1 - - [08/Jun/2025 08:12:21] "GET /watch/1 HTTP/1.1" 200 -
+2025-06-08 08:12:21,710 - INFO - 127.0.0.1 - - [08/Jun/2025 08:12:21] "[36mGET /static/js/stream.js HTTP/1.1[0m" 304 -
+2025-06-08 08:12:21,783 - INFO - Master key loaded successfully
+2025-06-08 08:12:21,808 - INFO - DEK decrypted successfully
+2025-06-08 08:12:21,999 - INFO - 127.0.0.1 - - [08/Jun/2025 08:12:21] "GET /stream/1 HTTP/1.1" 200 -
+2025-06-08 08:12:22,880 - INFO - 127.0.0.1 - - [08/Jun/2025 08:12:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-08 08:12:36,948 - INFO - 127.0.0.1 - - [08/Jun/2025 08:12:36] "GET / HTTP/1.1" 200 -
+2025-06-08 08:12:38,160 - INFO - 127.0.0.1 - - [08/Jun/2025 08:12:38] "[31m[1mGET /upload HTTP/1.1[0m" 403 -
+2025-06-08 08:13:05,935 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:05] "[32mGET /auth/logout HTTP/1.1[0m" 302 -
+2025-06-08 08:13:05,951 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:05] "GET /auth/login HTTP/1.1" 200 -
+2025-06-08 08:13:09,126 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:09] "[32mPOST /auth/login HTTP/1.1[0m" 302 -
+2025-06-08 08:13:09,140 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:09] "GET / HTTP/1.1" 200 -
+2025-06-08 08:13:10,458 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:10] "GET /upload HTTP/1.1" 200 -
+2025-06-08 08:13:22,447 - INFO - [UPLOAD] Saved raw file to uploads/sample-5.mp4
+2025-06-08 08:13:22,448 - INFO - Generated new DEK
+2025-06-08 08:13:22,468 - INFO - Master key loaded successfully
+2025-06-08 08:13:22,472 - INFO - DEK encrypted with KEK
+2025-06-08 08:13:22,496 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:22] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2025-06-08 08:13:22,522 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:22] "GET / HTTP/1.1" 200 -
+2025-06-08 08:13:31,339 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:31] "GET /watch/2 HTTP/1.1" 200 -
+2025-06-08 08:13:31,377 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:31] "[36mGET /static/js/stream.js HTTP/1.1[0m" 304 -
+2025-06-08 08:13:31,418 - INFO - Master key loaded successfully
+2025-06-08 08:13:31,419 - INFO - DEK decrypted successfully
+2025-06-08 08:13:31,494 - INFO - 127.0.0.1 - - [08/Jun/2025 08:13:31] "GET /stream/2 HTTP/1.1" 200 -
+2025-06-08 08:14:20,560 - INFO - 127.0.0.1 - - [08/Jun/2025 08:14:20] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:14:22,846 - INFO - 127.0.0.1 - - [08/Jun/2025 08:14:22] "GET / HTTP/1.1" 200 -
+2025-06-08 08:14:22,906 - INFO - 127.0.0.1 - - [08/Jun/2025 08:14:22] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:14:24,920 - INFO - 127.0.0.1 - - [08/Jun/2025 08:14:24] "GET /watch/2 HTTP/1.1" 200 -
+2025-06-08 08:14:24,963 - INFO - 127.0.0.1 - - [08/Jun/2025 08:14:24] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:14:24,968 - INFO - 127.0.0.1 - - [08/Jun/2025 08:14:24] "[36mGET /static/js/stream.js HTTP/1.1[0m" 304 -
+2025-06-08 08:14:25,087 - INFO - Master key loaded successfully
+2025-06-08 08:14:25,087 - INFO - DEK decrypted successfully
+2025-06-08 08:14:25,141 - INFO - 127.0.0.1 - - [08/Jun/2025 08:14:25] "GET /stream/2 HTTP/1.1" 200 -
+2025-06-08 08:15:27,637 - INFO - 127.0.0.1 - - [08/Jun/2025 08:15:27] "GET / HTTP/1.1" 200 -
+2025-06-08 08:15:27,690 - INFO - 127.0.0.1 - - [08/Jun/2025 08:15:27] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:15:29,868 - INFO - 127.0.0.1 - - [08/Jun/2025 08:15:29] "GET /watch/1 HTTP/1.1" 200 -
+2025-06-08 08:15:29,919 - INFO - 127.0.0.1 - - [08/Jun/2025 08:15:29] "[36mGET /static/js/stream.js HTTP/1.1[0m" 304 -
+2025-06-08 08:15:29,931 - INFO - 127.0.0.1 - - [08/Jun/2025 08:15:29] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:15:30,058 - INFO - Master key loaded successfully
+2025-06-08 08:15:30,058 - INFO - DEK decrypted successfully
+2025-06-08 08:15:30,196 - INFO - 127.0.0.1 - - [08/Jun/2025 08:15:30] "GET /stream/1 HTTP/1.1" 200 -
+2025-06-08 08:15:30,848 - INFO - 127.0.0.1 - - [08/Jun/2025 08:15:30] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-08 08:16:32,724 - INFO - 127.0.0.1 - - [08/Jun/2025 08:16:32] "GET / HTTP/1.1" 200 -
+2025-06-08 08:16:32,790 - INFO - 127.0.0.1 - - [08/Jun/2025 08:16:32] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:16:49,057 - INFO - 127.0.0.1 - - [08/Jun/2025 08:16:49] "GET /watch/2 HTTP/1.1" 200 -
+2025-06-08 08:16:49,100 - INFO - 127.0.0.1 - - [08/Jun/2025 08:16:49] "[36mGET /static/js/stream.js HTTP/1.1[0m" 304 -
+2025-06-08 08:16:49,121 - INFO - 127.0.0.1 - - [08/Jun/2025 08:16:49] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:16:49,220 - INFO - Master key loaded successfully
+2025-06-08 08:16:49,220 - INFO - DEK decrypted successfully
+2025-06-08 08:16:49,286 - INFO - 127.0.0.1 - - [08/Jun/2025 08:16:49] "GET /stream/2 HTTP/1.1" 200 -
+2025-06-08 08:17:11,887 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:11] "GET / HTTP/1.1" 200 -
+2025-06-08 08:17:11,967 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:11] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:17:12,778 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:12] "[32mGET /auth/logout HTTP/1.1[0m" 302 -
+2025-06-08 08:17:12,792 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:12] "GET /auth/login HTTP/1.1" 200 -
+2025-06-08 08:17:12,837 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:12] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:17:15,784 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:15] "[32mPOST /auth/login HTTP/1.1[0m" 302 -
+2025-06-08 08:17:15,799 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:15] "GET / HTTP/1.1" 200 -
+2025-06-08 08:17:15,847 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:15] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:17:17,514 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:17] "GET /upload HTTP/1.1" 200 -
+2025-06-08 08:17:17,552 - INFO - 127.0.0.1 - - [08/Jun/2025 08:17:17] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 08:18:02,623 - INFO - [UPLOAD] Saved raw file to uploads/SampleVideo_1280x720_30mb.mp4
+2025-06-08 08:18:02,623 - INFO - Generated new DEK
+2025-06-08 08:18:02,792 - INFO - Master key loaded successfully
+2025-06-08 08:18:02,792 - INFO - DEK encrypted with KEK
+2025-06-08 08:18:02,830 - INFO - 127.0.0.1 - - [08/Jun/2025 08:18:02] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2025-06-08 08:18:02,848 - INFO - 127.0.0.1 - - [08/Jun/2025 08:18:02] "GET / HTTP/1.1" 200 -
+2025-06-08 08:18:03,005 - INFO - 127.0.0.1 - - [08/Jun/2025 08:18:03] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:41:06,218 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-08 07:41:06,219 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-08 07:41:16,895 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:16] "GET / HTTP/1.1" 200 -
+2025-06-08 07:41:16,926 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:16] "GET / HTTP/1.1" 200 -
+2025-06-08 07:41:17,734 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:17] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-08 07:41:17,745 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:17] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-08 07:41:21,878 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:21] "GET /auth/login HTTP/1.1" 200 -
+2025-06-08 07:41:26,434 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:26] "[32mPOST /auth/login HTTP/1.1[0m" 302 -
+2025-06-08 07:41:26,458 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:26] "GET / HTTP/1.1" 200 -
+2025-06-08 07:41:32,878 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:32] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:41:35,949 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:35] "GET / HTTP/1.1" 200 -
+2025-06-08 07:41:36,041 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:36] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:41:41,843 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:41] "GET /watch/1 HTTP/1.1" 200 -
+2025-06-08 07:41:41,924 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:41] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:41:42,111 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:42] "[36mGET /static/js/stream.js HTTP/1.1[0m" 304 -
+2025-06-08 07:41:42,188 - INFO - Master key loaded successfully
+2025-06-08 07:41:42,217 - INFO - DEK decrypted successfully
+2025-06-08 07:41:42,518 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:42] "GET /stream/1 HTTP/1.1" 200 -
+2025-06-08 07:41:43,731 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:43] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-08 07:41:48,386 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:48] "GET / HTTP/1.1" 200 -
+2025-06-08 07:41:48,481 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:48] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:41:50,595 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:50] "[32mGET /auth/logout HTTP/1.1[0m" 302 -
+2025-06-08 07:41:50,614 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:50] "GET /auth/login HTTP/1.1" 200 -
+2025-06-08 07:41:50,706 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:50] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:41:57,492 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:57] "[32mPOST /auth/login HTTP/1.1[0m" 302 -
+2025-06-08 07:41:57,512 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:57] "GET / HTTP/1.1" 200 -
+2025-06-08 07:41:57,608 - INFO - 127.0.0.1 - - [08/Jun/2025 07:41:57] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:42:10,676 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:10] "GET /watch/1 HTTP/1.1" 200 -
+2025-06-08 07:42:10,758 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:10] "[36mGET /static/js/stream.js HTTP/1.1[0m" 304 -
+2025-06-08 07:42:10,792 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:10] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:42:10,964 - INFO - Master key loaded successfully
+2025-06-08 07:42:10,966 - INFO - DEK decrypted successfully
+2025-06-08 07:42:11,105 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:11] "GET /stream/1 HTTP/1.1" 200 -
+2025-06-08 07:42:12,147 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:12] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-08 07:42:15,662 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:15] "GET / HTTP/1.1" 200 -
+2025-06-08 07:42:15,763 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:15] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:42:18,464 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:18] "GET /watch/2 HTTP/1.1" 200 -
+2025-06-08 07:42:18,555 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:18] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-08 07:42:18,559 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:18] "[36mGET /static/js/stream.js HTTP/1.1[0m" 304 -
+2025-06-08 07:42:18,710 - INFO - Master key loaded successfully
+2025-06-08 07:42:18,711 - INFO - DEK decrypted successfully
+2025-06-08 07:42:18,816 - INFO - 127.0.0.1 - - [08/Jun/2025 07:42:18] "GET /stream/2 HTTP/1.1" 200 -
+2025-06-08 07:42:48,467 - ERROR - [CLEANUP ERROR] [WinError 32] The process cannot access the file because it is being used by another process: 'temp/clean_1.mp4'
+2025-06-08 07:43:15,750 - ERROR - [CLEANUP ERROR] [WinError 2] The system cannot find the file specified: 'temp/decrypted_1.mp4'

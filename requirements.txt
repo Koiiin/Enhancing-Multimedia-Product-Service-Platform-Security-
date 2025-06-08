@@ -8,3 +8,4 @@ flask-wtf
 email-validator
 pycryptodome
 boto3
+cryptography
