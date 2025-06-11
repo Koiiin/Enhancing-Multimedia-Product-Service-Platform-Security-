@@ -5,6 +5,7 @@ from config import Config
 from flask_login import LoginManager
 from models import User
 from routes.main import main
+from routes.handshake import handshake_bp as handshake
 from routes.auth import auth
 from routes.admin import admin
 from routes.payment import payment
@@ -33,6 +34,7 @@ def load_user(user_id):
         return db.session.get(User, int(user_id))
 
 app.register_blueprint(main)
+app.register_blueprint(handshake, url_prefix='/handshake')
 app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(admin, url_prefix='/admin')
 app.register_blueprint(payment, url_prefix='/payment')

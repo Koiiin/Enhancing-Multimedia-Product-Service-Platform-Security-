@@ -37,8 +37,9 @@ def convert_to_fragmented_mp4(input_path):
     subprocess.run([
         f"{ffmpeg_path}",
         "-i", f"{input_path}",
-        "-c:v", "libx264",
-        "-c:a", "aac",
+        # "-c:v", "libx264",
+        # "-c:a", "aac",
+        "-c", "copy",  # Giữ nguyên codec để tránh tái mã hóa
         "-movflags", "+frag_keyframe+empty_moov+default_base_moof",
         "-f", "mp4",
         f"{temp_output}"
